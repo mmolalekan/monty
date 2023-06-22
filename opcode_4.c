@@ -10,7 +10,7 @@
 void _mod(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
-	int len = 0, aux;
+	int len = 0, temp;
 
 	h = *head;
 	while (h)
@@ -35,8 +35,8 @@ void _mod(stack_t **head, unsigned int counter)
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	aux = h->next->n % h->n;
-	h->next->n = aux;
+	temp = h->next->n % h->n;
+	h->next->n = temp;
 	*head = h->next;
 	free(h);
 }
@@ -47,14 +47,14 @@ void _mod(stack_t **head, unsigned int counter)
 */
 void free_stack(stack_t *head)
 {
-	stack_t *aux;
+	stack_t *temp;
 
-	aux = head;
+	temp = head;
 	while (head)
 	{
-		aux = head->next;
+		temp = head->next;
 		free(head);
-		head = aux;
+		head = temp;
 	}
 }
 
@@ -120,7 +120,7 @@ int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 void _div(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
-	int len = 0, aux;
+	int len = 0, temp;
 
 	h = *head;
 	while (h)
@@ -145,8 +145,8 @@ void _div(stack_t **head, unsigned int counter)
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	aux = h->next->n / h->n;
-	h->next->n = aux;
+	temp = h->next->n / h->n;
+	h->next->n = temp;
 	*head = h->next;
 	free(h);
 }
@@ -160,15 +160,15 @@ void _div(stack_t **head, unsigned int counter)
 void add_node(stack_t **head, int n)
 {
 
-	stack_t *new_node, *aux;
+	stack_t *new_node, *temp;
 
-	aux = *head;
+	temp = *head;
 	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
+	if (!new_node)
 	{ printf("Error\n");
 		exit(0); }
-	if (aux)
-		aux->prev = new_node;
+	if (temp)
+		temp->prev = new_node;
 	new_node->n = n;
 	new_node->next = *head;
 	new_node->prev = NULL;

@@ -8,7 +8,7 @@
 */
 void _pint(stack_t **head, unsigned int counter)
 {
-	if (*head == NULL)
+	if (!*head)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", counter);
 		fclose(bus.file);
@@ -63,7 +63,7 @@ void _pall(stack_t **head, unsigned int counter)
 	(void)counter;
 
 	h = *head;
-	if (h == NULL)
+	if (!h)
 		return;
 	while (h)
 	{

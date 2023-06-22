@@ -4,7 +4,7 @@
  * @head: stack head
  * @counter: line_number
  * Return: no return
-*/
+ */
 void _queue(stack_t **head, unsigned int counter)
 {
 	(void)head;
@@ -17,33 +17,33 @@ void _queue(stack_t **head, unsigned int counter)
  * @n: new_value
  * @head: head of the stack
  * Return: no return
-*/
+ */
 void add_queue(stack_t **head, int n)
 {
-	stack_t *new_node, *aux;
+	stack_t *new_node, *temp;
 
-	aux = *head;
+	temp = *head;
 	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
+	if (!new_node)
 	{
 		printf("Error\n");
 	}
 	new_node->n = n;
 	new_node->next = NULL;
-	if (aux)
+	if (temp)
 	{
-		while (aux->next)
-			aux = aux->next;
+		while (temp->next)
+			temp = temp->next;
 	}
-	if (!aux)
+	if (!temp)
 	{
 		*head = new_node;
 		new_node->prev = NULL;
 	}
 	else
 	{
-		aux->next = new_node;
-		new_node->prev = aux;
+		temp->next = new_node;
+		new_node->prev = temp;
 	}
 }
 
@@ -52,7 +52,7 @@ void add_queue(stack_t **head, int n)
  * @head: stack head
  * @counter: line_number
  * Return: no return
-*/
+ */
 void _push(stack_t **head, unsigned int counter)
 {
 	int n, j = 0, flag = 0;
@@ -64,19 +64,25 @@ void _push(stack_t **head, unsigned int counter)
 		for (; bus.arg[j] != '\0'; j++)
 		{
 			if (bus.arg[j] > 57 || bus.arg[j] < 48)
-				flag = 1; }
+				flag = 1;
+		}
 		if (flag == 1)
-		{ fprintf(stderr, "L%d: usage: push integer\n", counter);
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", counter);
 			fclose(bus.file);
 			free(bus.line_content);
 			free_stack(*head);
-			exit(EXIT_FAILURE); }}
+			exit(EXIT_FAILURE);
+		}
+	}
 	else
-	{ fprintf(stderr, "L%d: usage: push integer\n", counter);
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", counter);
 		fclose(bus.file);
 		free(bus.line_content);
 		free_stack(*head);
-		exit(EXIT_FAILURE); }
+		exit(EXIT_FAILURE);
+	}
 	n = atoi(bus.arg);
 	if (bus.lifi == 0)
 		add_node(head, n);
@@ -84,14 +90,13 @@ void _push(stack_t **head, unsigned int counter)
 		add_queue(head, n);
 }
 
-
 /**
  * _pstr - prints the string starting at the top of the stack,
  * followed by a new
  * @head: stack head
  * @counter: line_number
  * Return: no return
-*/
+ */
 void _pstr(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
@@ -110,18 +115,17 @@ void _pstr(stack_t **head, unsigned int counter)
 	printf("\n");
 }
 
-
 /**
  * _pop - prints the top
  * @head: stack head
  * @counter: line_number
  * Return: no return
-*/
+ */
 void _pop(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
 
-	if (*head == NULL)
+	if (!*head)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
 		fclose(bus.file);

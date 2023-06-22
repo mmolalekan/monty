@@ -44,7 +44,7 @@ void _sub(stack_t **head, unsigned int counter)
 	int result, nodes;
 
 	temp = *head;
-	for (nodes = 0; temp != NULL; nodes++)
+	for (nodes = 0; temp; nodes++)
 		temp = temp->next;
 	if (nodes < 2)
 	{
@@ -82,22 +82,22 @@ void _stack(stack_t **head, unsigned int counter)
  */
 void _rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
 {
-	stack_t *copy;
+	stack_t *cpy;
 
-	copy = *head;
-	if (*head == NULL || (*head)->next == NULL)
+	cpy = *head;
+	if (!*head || !(*head)->next)
 	{
 		return;
 	}
-	while (copy->next)
+	while (cpy->next)
 	{
-		copy = copy->next;
+		cpy = cpy->next;
 	}
-	copy->next = *head;
-	copy->prev->next = NULL;
-	copy->prev = NULL;
-	(*head)->prev = copy;
-	(*head) = copy;
+	cpy->next = *head;
+	cpy->prev->next = NULL;
+	cpy->prev = NULL;
+	(*head)->prev = cpy;
+	(*head) = cpy;
 }
 
 /**
@@ -110,13 +110,13 @@ void _rotl(stack_t **head,  __attribute__((unused)) unsigned int counter)
 {
 	stack_t *tmp = *head, *temp;
 
-	if (*head == NULL || (*head)->next == NULL)
+	if (!*head || !(*head)->next)
 	{
 		return;
 	}
 	temp = (*head)->next;
 	temp->prev = NULL;
-	while (tmp->next != NULL)
+	while (tmp->next)
 	{
 		tmp = tmp->next;
 	}

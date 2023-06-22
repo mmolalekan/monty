@@ -9,7 +9,7 @@
 void _swap(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
-	int len = 0, aux;
+	int len = 0, temp;
 
 	h = *head;
 	while (h)
@@ -26,9 +26,9 @@ void _swap(stack_t **head, unsigned int counter)
 		exit(EXIT_FAILURE);
 	}
 	h = *head;
-	aux = h->n;
+	temp = h->n;
 	h->n = h->next->n;
-	h->next->n = aux;
+	h->next->n = temp;
 }
 
 
@@ -40,12 +40,12 @@ void _swap(stack_t **head, unsigned int counter)
  */
 void _sub(stack_t **head, unsigned int counter)
 {
-	stack_t *aux;
-	int sus, nodes;
+	stack_t *temp;
+	int result, nodes;
 
-	aux = *head;
-	for (nodes = 0; aux != NULL; nodes++)
-		aux = aux->next;
+	temp = *head;
+	for (nodes = 0; temp != NULL; nodes++)
+		temp = temp->next;
 	if (nodes < 2)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", counter);
@@ -54,11 +54,11 @@ void _sub(stack_t **head, unsigned int counter)
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	aux = *head;
-	sus = aux->next->n - aux->n;
-	aux->next->n = sus;
-	*head = aux->next;
-	free(aux);
+	temp = *head;
+	result = temp->next->n - temp->n;
+	temp->next->n = result;
+	*head = temp->next;
+	free(temp);
 }
 
 /**
@@ -108,14 +108,14 @@ void _rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
  */
 void _rotl(stack_t **head,  __attribute__((unused)) unsigned int counter)
 {
-	stack_t *tmp = *head, *aux;
+	stack_t *tmp = *head, *temp;
 
 	if (*head == NULL || (*head)->next == NULL)
 	{
 		return;
 	}
-	aux = (*head)->next;
-	aux->prev = NULL;
+	temp = (*head)->next;
+	temp->prev = NULL;
 	while (tmp->next != NULL)
 	{
 		tmp = tmp->next;
@@ -123,5 +123,5 @@ void _rotl(stack_t **head,  __attribute__((unused)) unsigned int counter)
 	tmp->next = *head;
 	(*head)->next = NULL;
 	(*head)->prev = tmp;
-	(*head) = aux;
+	(*head) = temp;
 }

@@ -1,12 +1,12 @@
 #include "monty.h"
 
 /**
- * f_swap - adds the top two elements of the stack.
+ * _swap - adds the top two elements of the stack.
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void f_swap(stack_t **head, unsigned int counter)
+void _swap(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
 	int len = 0, aux;
@@ -21,7 +21,7 @@ void f_swap(stack_t **head, unsigned int counter)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", counter);
 		fclose(bus.file);
-		free(bus.content);
+		free(bus.line_content);
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
@@ -33,12 +33,12 @@ void f_swap(stack_t **head, unsigned int counter)
 
 
 /**
-  *f_sub- sustration
+  *_sub- sustration
   *@head: stack head
   *@counter: line_number
   *Return: no return
  */
-void f_sub(stack_t **head, unsigned int counter)
+void _sub(stack_t **head, unsigned int counter)
 {
 	stack_t *aux;
 	int sus, nodes;
@@ -50,7 +50,7 @@ void f_sub(stack_t **head, unsigned int counter)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", counter);
 		fclose(bus.file);
-		free(bus.content);
+		free(bus.line_content);
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
@@ -62,12 +62,12 @@ void f_sub(stack_t **head, unsigned int counter)
 }
 
 /**
- * f_stack - prints the top
+ * _stack - prints the top
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void f_stack(stack_t **head, unsigned int counter)
+void _stack(stack_t **head, unsigned int counter)
 {
 	(void)head;
 	(void)counter;
@@ -75,12 +75,12 @@ void f_stack(stack_t **head, unsigned int counter)
 }
 
 /**
-  *f_rotr- rotates the stack to the bottom
+  *_rotr- rotates the stack to the bottom
   *@head: stack head
   *@counter: line_number
   *Return: no return
  */
-void f_rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
+void _rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
 {
 	stack_t *copy;
 
@@ -101,12 +101,12 @@ void f_rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
 }
 
 /**
-  *f_rotl- rotates the stack to the top
+  *_rotl- rotates the stack to the top
   *@head: stack head
   *@counter: line_number
   *Return: no return
  */
-void f_rotl(stack_t **head,  __attribute__((unused)) unsigned int counter)
+void _rotl(stack_t **head,  __attribute__((unused)) unsigned int counter)
 {
 	stack_t *tmp = *head, *aux;
 

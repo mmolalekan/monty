@@ -1,18 +1,18 @@
 #include "monty.h"
 
 /**
- * f_pint - prints the top
+ * _pint - prints the top
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void f_pint(stack_t **head, unsigned int counter)
+void _pint(stack_t **head, unsigned int counter)
 {
 	if (*head == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", counter);
 		fclose(bus.file);
-		free(bus.content);
+		free(bus.line_content);
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
@@ -20,13 +20,13 @@ void f_pint(stack_t **head, unsigned int counter)
 }
 
 /**
- * f_pchar - prints the char at the top of the stack,
+ * _pchar - prints the char at the top of the stack,
  * followed by a new line
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void f_pchar(stack_t **head, unsigned int counter)
+void _pchar(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
 
@@ -35,7 +35,7 @@ void f_pchar(stack_t **head, unsigned int counter)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", counter);
 		fclose(bus.file);
-		free(bus.content);
+		free(bus.line_content);
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
@@ -43,7 +43,7 @@ void f_pchar(stack_t **head, unsigned int counter)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", counter);
 		fclose(bus.file);
-		free(bus.content);
+		free(bus.line_content);
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
@@ -52,12 +52,12 @@ void f_pchar(stack_t **head, unsigned int counter)
 
 
 /**
- * f_pall - prints the stack
+ * _pall - prints the stack
  * @head: stack head
  * @counter: no used
  * Return: no return
 */
-void f_pall(stack_t **head, unsigned int counter)
+void _pall(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
 	(void)counter;
@@ -74,12 +74,12 @@ void f_pall(stack_t **head, unsigned int counter)
 
 
 /**
-  *f_nop- nothing
+  *_nop- nothing
   *@head: stack head
   *@counter: line_number
   *Return: no return
  */
-void f_nop(stack_t **head, unsigned int counter)
+void _nop(stack_t **head, unsigned int counter)
 {
 	(void) counter;
 	(void) head;
@@ -87,12 +87,12 @@ void f_nop(stack_t **head, unsigned int counter)
 
 
 /**
- * f_mul - multiplies the top two elements of the stack.
+ * _mul - multiplies the top two elements of the stack.
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void f_mul(stack_t **head, unsigned int counter)
+void _mul(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
 	int len = 0, aux;
@@ -107,7 +107,7 @@ void f_mul(stack_t **head, unsigned int counter)
 	{
 		fprintf(stderr, "L%d: can't mul, stack too short\n", counter);
 		fclose(bus.file);
-		free(bus.content);
+		free(bus.line_content);
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}

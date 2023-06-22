@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	{
 		content = NULL;
 		read_line = getline(&content, &size, file);
-		bus.content = content;
+		bus.line_content = content;
 		counter++;
 		if (read_line > 0)
 		{

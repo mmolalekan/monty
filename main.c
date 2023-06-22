@@ -1,13 +1,11 @@
 #include "monty.h"
-usb_t bus = {NULL, NULL, NULL, 0};
-
+bus_t bus = {NULL, NULL, NULL, 0};
 /**
 * main - monty code interpreter
 * @argc: number of arguments
 * @argv: monty file location
 * Return: 0 on success
 */
-
 int main(int argc, char *argv[])
 {
 	char *content;
@@ -33,11 +31,11 @@ int main(int argc, char *argv[])
 	{
 		content = NULL;
 		read_line = getline(&content, &size, file);
-		bus.file_content = content;
+		bus.content = content;
 		counter++;
 		if (read_line > 0)
 		{
-			exec(content, &stack, counter, file);
+			execute(content, &stack, counter, file);
 		}
 		free(content);
 	}
@@ -45,4 +43,3 @@ int main(int argc, char *argv[])
 	fclose(file);
 return (0);
 }
-

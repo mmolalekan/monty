@@ -1,11 +1,11 @@
 #include "monty.h"
 /**
- * queue - prints the top
+ * f_queue - prints the top
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void queue(stack_t **head, unsigned int counter)
+void f_queue(stack_t **head, unsigned int counter)
 {
 	(void)head;
 	(void)counter;
@@ -13,12 +13,12 @@ void queue(stack_t **head, unsigned int counter)
 }
 
 /**
- * add_queue - add node to the tail stack
+ * addqueue - add node to the tail stack
  * @n: new_value
  * @head: head of the stack
  * Return: no return
 */
-void add_queue(stack_t **head, int n)
+void addqueue(stack_t **head, int n)
 {
 	stack_t *new_node, *aux;
 
@@ -48,12 +48,12 @@ void add_queue(stack_t **head, int n)
 }
 
 /**
- * push - add node to the stack
+ * f_push - add node to the stack
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void push(stack_t **head, unsigned int counter)
+void f_push(stack_t **head, unsigned int counter)
 {
 	int n, j = 0, flag = 0;
 
@@ -68,30 +68,31 @@ void push(stack_t **head, unsigned int counter)
 		if (flag == 1)
 		{ fprintf(stderr, "L%d: usage: push integer\n", counter);
 			fclose(bus.file);
-			free(bus.file_content);
+			free(bus.content);
 			free_stack(*head);
 			exit(EXIT_FAILURE); }}
 	else
 	{ fprintf(stderr, "L%d: usage: push integer\n", counter);
 		fclose(bus.file);
-		free(bus.file_content);
+		free(bus.content);
 		free_stack(*head);
 		exit(EXIT_FAILURE); }
 	n = atoi(bus.arg);
 	if (bus.lifi == 0)
-		add_node(head, n);
+		addnode(head, n);
 	else
-		add_queue(head, n);
+		addqueue(head, n);
 }
 
+
 /**
- * pstr - prints the string starting at the top of the stack,
+ * f_pstr - prints the string starting at the top of the stack,
  * followed by a new
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void pstr(stack_t **head, unsigned int counter)
+void f_pstr(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
 	(void)counter;
@@ -109,13 +110,14 @@ void pstr(stack_t **head, unsigned int counter)
 	printf("\n");
 }
 
+
 /**
- * pop - prints the top
+ * f_pop - prints the top
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void pop(stack_t **head, unsigned int counter)
+void f_pop(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
 
@@ -123,7 +125,7 @@ void pop(stack_t **head, unsigned int counter)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
 		fclose(bus.file);
-		free(bus.file_content);
+		free(bus.content);
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}

@@ -1,14 +1,15 @@
 #include "monty.h"
+
 /**
- * swap - adds the top two elements of the stack.
+ * f_swap - adds the top two elements of the stack.
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void swap(stack_t **head, unsigned int counter)
+void f_swap(stack_t **head, unsigned int counter)
 {
 	stack_t *h;
-	int len = 0, temp;
+	int len = 0, aux;
 
 	h = *head;
 	while (h)
@@ -20,53 +21,53 @@ void swap(stack_t **head, unsigned int counter)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", counter);
 		fclose(bus.file);
-		free(bus.file_content);
+		free(bus.content);
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
 	h = *head;
-	temp = h->n;
+	aux = h->n;
 	h->n = h->next->n;
-	h->next->n = temp;
+	h->next->n = aux;
 }
 
 
 /**
-  *sub- sustration
+  *f_sub- sustration
   *@head: stack head
   *@counter: line_number
   *Return: no return
  */
-void sub(stack_t **head, unsigned int counter)
+void f_sub(stack_t **head, unsigned int counter)
 {
-	stack_t *temp;
+	stack_t *aux;
 	int sus, nodes;
 
-	temp = *head;
-	for (nodes = 0; temp != NULL; nodes++)
-		temp = temp->next;
+	aux = *head;
+	for (nodes = 0; aux != NULL; nodes++)
+		aux = aux->next;
 	if (nodes < 2)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", counter);
 		fclose(bus.file);
-		free(bus.file_content);
+		free(bus.content);
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	temp = *head;
-	sus = temp->next->n - temp->n;
-	temp->next->n = sus;
-	*head = temp->next;
-	free(temp);
+	aux = *head;
+	sus = aux->next->n - aux->n;
+	aux->next->n = sus;
+	*head = aux->next;
+	free(aux);
 }
 
 /**
- * stack - prints the top
+ * f_stack - prints the top
  * @head: stack head
  * @counter: line_number
  * Return: no return
 */
-void stack(stack_t **head, unsigned int counter)
+void f_stack(stack_t **head, unsigned int counter)
 {
 	(void)head;
 	(void)counter;
@@ -74,12 +75,12 @@ void stack(stack_t **head, unsigned int counter)
 }
 
 /**
-  *rotr- rotates the stack to the bottom
+  *f_rotr- rotates the stack to the bottom
   *@head: stack head
   *@counter: line_number
   *Return: no return
  */
-void rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
+void f_rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
 {
 	stack_t *copy;
 
@@ -100,21 +101,21 @@ void rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
 }
 
 /**
-  *rotl- rotates the stack to the top
+  *f_rotl- rotates the stack to the top
   *@head: stack head
   *@counter: line_number
   *Return: no return
  */
-void rotl(stack_t **head,  __attribute__((unused)) unsigned int counter)
+void f_rotl(stack_t **head,  __attribute__((unused)) unsigned int counter)
 {
-	stack_t *tmp = *head, *temp;
+	stack_t *tmp = *head, *aux;
 
 	if (*head == NULL || (*head)->next == NULL)
 	{
 		return;
 	}
-	temp = (*head)->next;
-	temp->prev = NULL;
+	aux = (*head)->next;
+	aux->prev = NULL;
 	while (tmp->next != NULL)
 	{
 		tmp = tmp->next;
@@ -122,5 +123,5 @@ void rotl(stack_t **head,  __attribute__((unused)) unsigned int counter)
 	tmp->next = *head;
 	(*head)->next = NULL;
 	(*head)->prev = tmp;
-	(*head) = temp;
+	(*head) = aux;
 }

@@ -1,14 +1,13 @@
 #ifndef MONTY_H
 #define MONTY_H
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
 #include <sys/types.h>
-#include <sys/stat.h>
+#include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
 #include <ctype.h>
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -17,7 +16,7 @@
  * @next: points to the next element of the stack (or queue)
  *
  * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO Holberton project
+ * for stack, queues, LIFO, FIFO
  */
 typedef struct stack_s
 {
@@ -26,27 +25,25 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
+
 /**
- * struct globals - global structure to use in the functions
- * @lifo: is stack or queue
- * @cont: current line
- * @arg: second parameter inside the current line
- * @head: doubly linked list
- * @fd: file descriptor
- * @buffer: input text
- *
- * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO Holberton project
+ * struct usb_s - variables -args, file, line file_content
+ * @arg: value
+ * @file: pointer to monty file
+ * @file_content: line content
+ * @lifi: flag change stack <-> queue
+ * Description: carries values through the program
  */
-typedef struct globals
+typedef struct usb_s
 {
-	int lifo;
-	unsigned int cont;
-	char  *arg;
-	stack_t *head;
-	FILE *fd;
-	char *buffer;
-} global_t;
+	char *arg;
+	FILE *file;
+	char *file_content;
+	int lifi;
+}  usb_t;
+
+extern usb_t bus;
+
 
 /**
  * struct instruction_s - opcode and its function
@@ -62,41 +59,30 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern global_t global_var;
 
-/* opcode_instructuions*/
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **doubly, unsigned int cline);
-void pop(stack_t **doubly, unsigned int cline);
-void swap(stack_t **doubly, unsigned int cline);
-void queue(stack_t **doubly, unsigned int cline);
-void stack(stack_t **doubly, unsigned int cline);
-void add(stack_t **doubly, unsigned int cline);
-void nop(stack_t **doubly, unsigned int cline);
-void sub(stack_t **doubly, unsigned int cline);
-void DIV(stack_t **doubly, unsigned int cline);
-void mul(stack_t **doubly, unsigned int cline);
-void mod(stack_t **doubly, unsigned int cline);
-void pchar(stack_t **doubly, unsigned int cline);
-void pstr(stack_t **doubly, unsigned int cline);
-void rotl(stack_t **doubly, unsigned int cline);
-void rotr(stack_t **doubly, unsigned int cline);
-
-/*get function*/
-void (*opcode_choice(char *opc))(stack_t **stack, unsigned int line_number);
-
-/*imported functions*/
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-void *_calloc(unsigned int nmemb, unsigned int size);
-int sch(char *s, char c);
-
-/* doubly linked list functions */
-stack_t *add_dnodeint_end(stack_t **head, const int n);
-stack_t *add_dnodeint(stack_t **head, const int n);
-void free_dlistint(stack_t *head);
-
-/* main */
-void free_global_var(void);
+char *_realloc(char *ptr, unsigned int old_size, unsigned int new_size);
+ssize_t get_stdin(char **lineptr, int file);
+char  *clean_content(char *content);
+void push(stack_t **head, unsigned int number);
+void pall(stack_t **head, unsigned int number);
+void pint(stack_t **head, unsigned int number);
+int exec(char *content, stack_t **head, unsigned int counter, FILE *file);
+void free_stack(stack_t *head);
+void pop(stack_t **head, unsigned int counter);
+void swap(stack_t **head, unsigned int counter);
+void add(stack_t **head, unsigned int counter);
+void nop(stack_t **head, unsigned int counter);
+void sub(stack_t **head, unsigned int counter);
+void div(stack_t **head, unsigned int counter);
+void mul(stack_t **head, unsigned int counter);
+void mod(stack_t **head, unsigned int counter);
+void pchar(stack_t **head, unsigned int counter);
+void pstr(stack_t **head, unsigned int counter);
+void rotl(stack_t **head, unsigned int counter);
+void rotr(stack_t **head, __attribute__((unused)) unsigned int counter);
+void add_node(stack_t **head, int n);
+void add_queue(stack_t **head, int n);
+void queue(stack_t **head, unsigned int counter);
+void stack(stack_t **head, unsigned int counter);
 
 #endif

@@ -1,39 +1,32 @@
 #include "monty.h"
-
 /**
- * opcode_choice - selects the correct opcode to perform
- * @choice: opcode passed
- * Return: pointer to the function that executes the opcode
- */
-void (*opcode_choice(char *choice))(stack_t **stack, unsigned int line_number)
+ * add - adds the top two elements of the stack.
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
+*/
+void add(stack_t **head, unsigned int counter)
 {
-	instruction_t instruct_pair[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"queue", queue},
-		{"stack", stack},
-		{"add", add},
-		{"nop", nop},
-		{"sub", sub},
-		{"mul", mul},
-		{"div", DIV},
-		{"mod", mod},
-		{"pchar", pchar},
-		{"pstr", pstr},
-		{"rotl", rotl},
-		{"rotr", rotr},
-		{NULL, NULL}
-	};
+	stack_t *h;
+	int len = 0, aux;
 
-	int i;
-	for (i = 0; instruct_pair[i].opcode; i++)
+	h = *head;
+	while (h)
 	{
-		if (strcmp(instruct_pair[i].opcode, choice) == 0)
-			break;
+		h = h->next;
+		len++;
 	}
-
-	return (instruct_pair[i].f);
+	if (len < 2)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", counter);
+		fclose(bus.file);
+		free(bus.file_content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	h = *head;
+	aux = h->n + h->next->n;
+	h->next->n = aux;
+	*head = h->next;
+	free(h);
 }
